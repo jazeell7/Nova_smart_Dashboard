@@ -11,7 +11,7 @@ st.set_page_config(
 
 st.title("NovaMart Dashboard — Muhammed Najif")
 
-#@st.cache_data
+@st.cache_data
 def load_data():
     return pd.read_csv(r"C:\Users\Lenovo\OneDrive\Desktop\P2_NovaMart_MuhammedNajif_v1\output\novamart_clean.csv")
 df = load_data()
