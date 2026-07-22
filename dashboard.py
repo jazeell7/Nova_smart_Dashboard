@@ -9,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("NovaMart Dashboard — Muhammed Faraz")
+st.title("NovaMart Dashboard — Jazeel Muzammil")
 
 @st.cache_data
 def load_data():
