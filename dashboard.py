@@ -9,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("NovaMart Dashboard — Muhammed Najif")
+st.title("NovaMart Dashboard — Muhammed Faraz")
 
 @st.cache_data
 def load_data():
@@ -168,103 +168,3 @@ st.dataframe(
     filtered_df,
     use_container_width=True
 )
-
-st.markdown("---")
-
-st.info("""
-**Note:**  
-The following features are **optional enhancements** suggested to improve the dashboard's functionality and visual presentation.  
-They are **not part of the original project requirements** and have therefore not been implemented in this submission.
-""")
-
-# ===========================
-# pie chart and bar chart
-# ===========================
-
-st.markdown("---")
-
-st.subheader("Pie Chart")
-
-region_sales = (
-    filtered_df
-    .groupby("region")["sales"]
-    .sum()
-)
-
-fig, ax = plt.subplots(figsize=(6,6))
-
-ax.pie(
-    region_sales,
-    labels=region_sales.index,
-    autopct="%1.1f%%",
-    startangle=90
-)
-
-ax.set_title("Sales by Region")
-
-st.pyplot(fig)
-
-st.markdown("---")
-
-st.subheader("Bar Chart")
-
-profit_category = (
-    filtered_df
-    .groupby("category")["profit"]
-    .sum()
-)
-
-fig, ax = plt.subplots(figsize=(8,5))
-
-ax.bar(
-    profit_category.index,
-    profit_category.values
-)
-
-ax.set_title("Profit by Category")
-
-st.pyplot(fig)
-
-# ===========================
-# Top 10 Cities by Sales
-# ===========================
-
-st.markdown("---")
-
-st.subheader("🏙️ Top 10 cities")
-
-city_sales = (
-    filtered_df
-    .groupby("city")["sales"]
-    .sum()
-    .sort_values(ascending=False)
-    .head(10)
-)
-
-fig, ax = plt.subplots(figsize=(10,5))
-
-ax.barh(
-    city_sales.index,
-    city_sales.values
-)
-
-ax.invert_yaxis()
-
-st.pyplot(fig)
-
-# ===========================
-# Download Filtered Data
-# ===========================
-
-csv = filtered_df.to_csv(index=False)
-
-st.download_button(
-    label="📥 Download Filtered Data",
-    data=csv,
-    file_name="filtered_novamart.csv",
-    mime="text/csv"
-)
-
-
-st.markdown("---")
-st.caption("NovaMart Dashboard | Created by Muhammed Najif")
